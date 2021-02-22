@@ -1,0 +1,26 @@
+{
+  "name": "nco",
+  "title": "Neon City Overdrive",
+  "description": "Many details here.",
+  "version": "0.0.0",
+  "minimumCoreVersion": "0.7.5",
+  "compatibleCoreVersion": "0.7.9",
+  "templateVersion": 2,
+  "author": "IYOV",
+  "esmodules": ["nco.js"],
+  "styles": ["nco.css"],
+  "packs": [],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "socket": true,
+  "gridDistance": 5,
+  "gridUnits": "ft",
+  "url": "https://github.com/IYOV-git/foundry-nco",
+  "manifest": "https://github.com/IYOV-git/foundry-nco/blob/main/nco/system.json",
+  "download": "https://your/packaged/download/archive.zip"
+}
