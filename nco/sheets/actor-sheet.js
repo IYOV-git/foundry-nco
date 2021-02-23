@@ -1,3 +1,5 @@
+import * as Dice from "../dice.js";
+
 export class ActorSheetNCO extends ActorSheet {
   constructor(...args) {
     super(...args);
@@ -20,6 +22,14 @@ export class ActorSheetNCO extends ActorSheet {
   }
 
   activateListeners(html) {
+    if (this.actor.owner) {
+      html.find(".button-roll").click((e) => this._onTheCheck(e));
+    }
     super.activateListeners(html);
+  }
+
+  _onTheCheck(event) {
+    event.preventDefault();
+    Dice.theCheck();
   }
 }
