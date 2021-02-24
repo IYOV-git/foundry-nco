@@ -34,7 +34,7 @@ export function theCheck() {
 
   console.log(actionResult, dangerResult);
 
-  for (i = 0; i < actionResult.length; i++) {
+  for (i = actionResult.length; i > -1; i--) {
     for (j = 0; j < dangerResult.length; j++)
       if (actionResult[i] == dangerResult[j]) {
         actionResult.splice(i, 1);
