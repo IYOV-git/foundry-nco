@@ -34,7 +34,7 @@ export function theCheck() {
 
   console.log(actionResult, dangerResult);
 
-  for (i = actionResult.length; i > -1; i--) {
+  for (i = actionResult.length - 1; i > -1; i--) {
     for (j = 0; j < dangerResult.length; j++)
       if (actionResult[i] == dangerResult[j]) {
         actionResult.splice(i, 1);
@@ -44,7 +44,10 @@ export function theCheck() {
 
   console.log(actionResult, dangerResult);
 
-  console.log(actionResult[actionResult.length - 1]);
+  console.log(
+    actionResult[actionResult.length - 1],
+    dangerResult[dangerResult.length - 1]
+  );
 
   const messageData = {
     speaker: ChatMessage.getSpeaker(),
