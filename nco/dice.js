@@ -14,9 +14,9 @@ export function theCheck() {
     rolls: [actionRoll, dangerRoll],
   });
 
-  console.log(pool.dice);
-
   pool.evaluate();
+
+  console.log(pool.dice);
 
   let actionResult = [];
   let dangerResult = [];
