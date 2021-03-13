@@ -30,6 +30,6 @@ export class ActorSheetNCO extends ActorSheet {
 
   _onTheCheck(event) {
     event.preventDefault();
-    Dice.theCheck();
+    Dice.theCheck(4, 4);
   }
 }

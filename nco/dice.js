@@ -1,52 +1,45 @@
-export function theCheck() {
-  let i, j;
-
-  const aDice = 4;
-  const dDice = 4;
-
-  const actionDice = aDice + "d6";
-  const damageDice = dDice + "d6";
-
-  const actionRoll = new Roll(actionDice);
-  const dangerRoll = new Roll(damageDice);
-
-  let pool = new DicePool({
-    rolls: [actionRoll, dangerRoll],
+export function theCheck(actionDice, dangerDice) {
+  const pool = new DicePool({
+    rolls: [new Roll(`${actionDice}d6`), new Roll(`${dangerDice}d6`)],
   });
 
   pool.evaluate();
 
   console.log(pool.dice);
 
-  let actionResult = [];
-  let dangerResult = [];
+  const actionResults = pool.dice[0].results
+    .map((aR) => aR.result)
+    .sort()
+    .reverse()
+    .map((aR) => ({
+      value: aR,
+      disc: false,
+    }));
 
-  for (i = 0; i < aDice; i++) {
-    actionResult.push(pool.dice[0].results[i].result);
-  }
+  const dangerResults = pool.dice[1].results
+    .map((dR) => dR.result)
+    .sort()
+    .reverse()
+    .map((dR) => ({
+      value: dR,
+      disc: false,
+    }));
 
-  for (j = 0; j < dDice; j++) {
-    dangerResult.push(pool.dice[1].results[j].result);
-  }
+  actionResults.forEach((aR) => {
+    const dRI = dangerResults.findIndex(
+      (dR) => !dR.disc && dR.value === aR.value
+    );
+    if (dRI != -1) {
+      aR.disc = true;
+      dangerResults[dRI].disc = true;
+    }
+  });
 
-  actionResult.sort();
-  dangerResult.sort();
-
-  console.log(actionResult, dangerResult);
-
-  for (i = actionResult.length - 1; i > -1; i--) {
-    for (j = 0; j < dangerResult.length; j++)
-      if (actionResult[i] == dangerResult[j]) {
-        actionResult.splice(i, 1);
-        dangerResult.splice(j, 1);
-      }
-  }
-
-  console.log(actionResult, dangerResult);
+  console.log(actionResults, dangerResults);
 
   console.log(
-    actionResult[actionResult.length - 1],
-    dangerResult[dangerResult.length - 1]
+    actionResults.find((aR) => !aR.disc),
+    dangerResults.find((dR) => !dR.disc)
   );
 
   const messageData = {
